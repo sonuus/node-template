@@ -37,16 +37,16 @@ const pool = new Pool({
 
 
 module.exports = {
-    get(req,res,next){        
+    async get(req,res,next){        
         console.log(`Hello............AWS`);
 
         //putObjectS3();
 
         //PutSQSMessage(req.appName);
         
-        getDbRecords();
-
-        res.status(200).send(JSON.stringify('Hello'));
+        var dbResults=await getDbRecords();
+        //console.log(`${dbResults}`);
+        res.status(200).send(JSON.stringify(dbResults));
         next();
     }
 
@@ -112,6 +112,7 @@ async function getDbRecords(params) {
             console.log(`email is ==>${b} & user Name is ${X}`);
             
         }
+        return  dbResult.rows;
     } catch (error) {
         console.log(error);
     }
