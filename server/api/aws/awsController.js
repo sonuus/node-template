@@ -38,7 +38,7 @@ const pool = new Pool({
 
 module.exports = {
     async get(req,res,next){        
-        console.log(`Hello............AWS`);
+        console.log(`Hello............AWS Start`);
 
         //putObjectS3();
 
@@ -47,8 +47,10 @@ module.exports = {
             var dbResults=await getDbRecords();
              //console.log(`${dbResults}`);
             res.status(200).send(JSON.stringify(dbResults));
+            console.log(`Hello............AWS End`);
         } catch (error) {
             console.error(error);
+            console.log(`Hello............AWS End`);
             res.status(200).send(error.stack);
         }
         

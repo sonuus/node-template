@@ -4,6 +4,17 @@ uncaught.start();
 uncaught.addListener(function (error) {
   console.log('Uncaught error or rejection: ', error.message);
 });
+process.on('exit', (code) => {
+  console.log(`About to exit with code: ${code}`);
+});
+
+
+// Using a single function to handle multiple signals
+function handle(signal) {
+  console.log(`Received ${signal}`);
+}
+process.on('SIGINT', handle);
+process.on('SIGTERM', handle);
 
 var app = express();
 
