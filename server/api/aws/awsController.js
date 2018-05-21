@@ -43,10 +43,15 @@ module.exports = {
         //putObjectS3();
 
         //PutSQSMessage(req.appName);
+        try {
+            var dbResults=await getDbRecords();
+             //console.log(`${dbResults}`);
+            res.status(200).send(JSON.stringify(dbResults));
+        } catch (error) {
+            console.error(error);
+            res.status(200).send(error.stack);
+        }
         
-        var dbResults=await getDbRecords();
-        //console.log(`${dbResults}`);
-        res.status(200).send(JSON.stringify(dbResults));
         next();
     }
 
@@ -100,7 +105,7 @@ async function PutSQSMessage(messageFromGet){
 }
 
 async function getDbRecords(params) {
-    try {
+    // try {
         let dbResult = await pool.query('select * from account');
         for (u of dbResult.rows) {
             //console.log(`${u.username}`);            
@@ -113,12 +118,13 @@ async function getDbRecords(params) {
             
         }
         return  dbResult.rows;
-    } catch (error) {
-        console.log(error);
-    }
-    finally{
-      //  pool.end();
-    }
+    // } catch (error) {
+    //     console.error(error.stack);
+    //     //throw error;
+    // }
+    // finally{
+    //   //  pool.end();
+    // }
 
     
 
