@@ -7,6 +7,8 @@ var config =require('./config/config');
 var logger= require('./utils/logger');
 var auth = require('./auth/routes');
 
+app.set('json spaces', 2);
+
 try {
   // db.url is different depending on NODE_ENV
  // require('mongoose').connect(config.db.url);
@@ -21,6 +23,18 @@ if(config.seed){
 
 // setup the app middlware
 require('./middleware/appMiddleware')(app);
+
+app.get('/', function (req, res) {
+  console.log(res.headersSent); // false
+  res.status(200).send('200 OK');
+  console.log(res.headersSent); // true
+});
+
+app.get('/pro', function (req, res) {
+  console.log(res.headersSent); // false
+  res.status(200).send(process.env);
+  console.log(res.headersSent); // true
+});
 
 // setup the apis
 app.use('/api', api);
@@ -38,7 +52,7 @@ app.use((err,req,res,next) => {
   }
 
   logger.error(err.stack);
-  res.status(500).send('Sorry Error happened...' + err)
+  res.status(200).send('Sorry Error happened...' + err)
 })
 
 module.exports = app;
