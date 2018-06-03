@@ -1,7 +1,8 @@
 'use strict'
 var router = require('express').Router();
 var logger=require('morgan');
-var cont=require('./awsController');
+var awsController=require('./awsController');
+var es6Controller=require('./es6Controller');
 
 
 router.param("appName",function (req,res,next,appName) {
@@ -16,11 +17,14 @@ router.param("appName",function (req,res,next,appName) {
     next();
 })
 
-router.route('/:appName')
-.get(cont.get);
+// router.route('/:appName')
+// .get(awsController.get);
 
-router.route('/es6Trials')
-.get(cont.get);
+router.route('/amz')
+.get(awsController.get);
+
+router.route('/es6')
+.get(es6Controller.get);
 
 
 

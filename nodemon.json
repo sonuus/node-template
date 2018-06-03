@@ -1,0 +1,7 @@
+{
+  "env": {
+    "PRIVATE_KEY": "MyKey",
+    "DOCKER_MONGODB": "192.168.99.100:8000",
+    "AWS_XRAY_CONTEXT_MISSING":"LOG_ERROR"
+  }
+}

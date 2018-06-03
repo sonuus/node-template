@@ -1,3 +1,24 @@
+module.exports = {
+    async get(req,res,next){        
+        console.log(`Hello............ES6 Trials Start`);
+
+        try {        
+            //listTrials();
+            mapAndsets();
+
+            res.status(200).send('Ok');
+            console.log(`Hello............ES6 Trials End`);
+        } catch (error) {
+            console.error(error);
+            console.log(`Hello............ES6 Trials Error`);
+            res.status(200).send(error.stack);
+        }
+        
+        next();
+    }
+
+}
+
 //region/////////// Symbol search /////////////////
 
 function es6SymbolsTest(params) {
@@ -20,8 +41,7 @@ function es6SymbolsTest(params) {
 
 }
 //endregion /////////////////////// Symbol search //////////////////
-
-/// start your own Ireators and Iterables ////////////////////////
+//region /// start your own Ireators and Iterables ////////////////////////
 function es6IterablesTest(params) {
     
     class Users{
@@ -73,9 +93,7 @@ function es6IterablesTest(params) {
 
 
 
-// end your own Ireators and Iterables ////////////////////////
-
-
+//endregion //end your own Ireators and Iterables ////////////////////////
 // region ///////// Start Genrators ////////////////////////
 
 function es6GeneratorsTest(bucketsParam) {
@@ -126,9 +144,7 @@ function es6GeneratorsTest(bucketsParam) {
 
 }
 
-// endregion
-
-
+//endregion //////n
 // region ///////// Async Generators ////////////////////////
 
 
@@ -146,5 +162,157 @@ function es6AsyncGeneratorsTest(params) {
 
     testAsyncGenerators(promises);
 }
+
+// endregion
+// region ///////// List & other javascript operations like map , set  ////////////////////////
+
+function listTrials(params) {
+    
+    /// Filter
+    const studentsAge= [17, 16, 18, 19, 21, 17];
+    const ableToDrink = studentsAge.filter(age => age > 18 );
+    ableToDrink.forEach(x=> console.log(x));
+
+    ///Map
+    const numbers = [2,3,4,5];
+    const dollars = numbers.map((n) => {
+        return '$' + n;
+    });
+    
+    dollars.forEach(x=>console.log(x));
+
+    //Reduce
+    const nums = [5, 10, 15];
+    let initialValue = 20 ;
+    const total = nums.reduce(function(accumulator, currentValue, currentIndex, array){
+        return accumulator + currentValue;
+    },initialValue);
+    console.log(`Total is ${total}`);
+
+    initialValue = 0;
+    var sum = [{x: 1}, {x:2}, {x:3}].reduce(
+        (accumulator, currentValue) => accumulator + currentValue.x
+        ,initialValue
+    );
+    
+    console.log(sum) // logs 6
+
+    // Flatten an array of arrays
+
+    var flattened = [[0,1],[2,3],[4,5]].reduce((prevVal,currentVal)=>{
+        return prevVal.concat(currentVal);
+    });
+    console.log(flattened);
+
+    //Counting instances of values in an object
+    let names = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice'];
+    initialValue = {};
+    let countedNames = names.reduce(function (prevVal,currentVal) {
+        if(currentVal in prevVal){
+            prevVal[currentVal]++;
+
+        }else{
+            prevVal[currentVal]=1;
+        }
+
+        return prevVal;
+        
+    },initialValue);
+
+    console.log(`Counted Names : ${JSON.stringify(countedNames)}`);
+
+    ///Some example
+    const userPrivileges = ['user', 'user', 'user', 'admin'];
+    const containsAdmin = userPrivileges.some( element => element === 'admin1');
+
+    console.log(`containsAdmin = ${containsAdmin}`);
+
+    // every example
+    //Check if all ratings are equal to or greater than 3 stars.
+    const ratings = [3, 5, 4, 3, 5];
+    const goodOverallRating = ratings.every((movieRating) => {
+        return movieRating >= 3 ;
+    })
+    console.log(`goodOverallRating more than >= 3 ${goodOverallRating}`);
+
+    //Object.values() method returns an array of a given object's own enumerable property values
+
+    const object1 = {
+        a: 'somestring',
+        b: 42,
+        c: false
+      };
+
+      console.log(Object.values(object1));
+      
+    
+    ///Array Spreading
+    const arrOne= [1,2,3,4];
+    const arrTwo = [5,6,7,8];
+    const combinedArr = [...arrOne,...arrTwo];
+    console.info(combinedArr);
+
+    /// Object spreading 
+    const spreadableObject = {
+        name: 'Robert',
+        phone: 'iPhone'
+      };
+    
+    const newObject = {
+    ...spreadableObject,
+    carModel: 'Volkswagen'
+    }
+
+    console.log(`${JSON.stringify(newObject)}`);
+
+
+
+
+
+
+}
+
+function mapAndsets(params) {
+    
+    var myMap = new Map();
+    var keystring = 'a string' ,
+        keyObject = {}, 
+        keyFunc= function(){};
+
+    myMap.set(keystring,'zzzzzzz keystring');
+    myMap.set(keyObject, 'value associated with Key Obj');
+    myMap.set(keyFunc,'value associated with keyFunc');
+
+    console.log(myMap.size); // 3
+
+    //getting the values 
+    console.log(myMap.get('a string')); // "value associated with 'a string'"
+                                        // because keyString === 'a string'
+
+    console.log(myMap.get({})) // undefined, because keyObj !== {}
+    
+    myMap.get(function() {}) // undefined, because keyFunc !== function () {}
+
+    //Iteration on Maps
+    var myMap2 = new Map();
+    myMap2.set(0,'zero');
+    myMap2.set(1,'one');
+    myMap2.set(2,'two');
+    myMap2.set(3,'three');
+    myMap2.set(4,'four');
+    myMap2.set(5,'five');
+
+    for (const iterator of myMap2.keys()) {
+        console.log(`${iterator}`);
+    }
+
+    for (const [key,value] of myMap2.entries()) {
+
+        console.log(`key = ${key} and value = ${value}`);
+    }
+
+    
+}
+
 
 // endregion
