@@ -148,20 +148,20 @@ function es6GeneratorsTest(bucketsParam) {
 // region ///////// Async Generators ////////////////////////
 
 
-async function testAsyncGenerators(promises) {
-    for await(let p of promises){
-        console.log(p);
-    }
-}
+// async function testAsyncGenerators(promises) {
+//     for await(let p of promises){
+//         console.log(p);
+//     }
+// }
 
-function es6AsyncGeneratorsTest(params) {    
-    const promises=[new Promise(resolve=>console.log('1111111111')),
-                    new Promise(resolve=>console.log('22222222')) ,
-                    new Promise(resolve=>console.log('333333333'))
-                    ];
+// function es6AsyncGeneratorsTest(params) {    
+//     const promises=[new Promise(resolve=>console.log('1111111111')),
+//                     new Promise(resolve=>console.log('22222222')) ,
+//                     new Promise(resolve=>console.log('333333333'))
+//                     ];
 
-    testAsyncGenerators(promises);
-}
+//     testAsyncGenerators(promises);
+// }
 
 // endregion
 // region ///////// List & other javascript operations like map , set  ////////////////////////

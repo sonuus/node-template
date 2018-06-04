@@ -4,7 +4,8 @@ var AWSXRay = require('aws-xray-sdk');
 var loggerW = require('winston');
 var http = AWSXRay.captureHTTPs(require('http'));
 
-console.log(`${__dirname}`);
+//console.log(`${__dirname}`);
+
 AWSXRay.setLogger(loggerW);
 AWSXRay.config([AWSXRay.plugins.ECSPlugin]);
 //AWSXRay.middleware.setSamplingRules('./sampling-rules.json');
@@ -18,7 +19,7 @@ const apiCNAME = process.env.API_CNAME || 'localhost';
 
 uncaught.start();
 uncaught.addListener(function (error) {
-  console.log('Uncaught error or rejection: ', error.message);
+  console.log('Uncaught error or rejection: ', error);
 });
 process.on('exit', (code) => {
   console.log(`About to exit with code: ${code}`);
