@@ -6,7 +6,7 @@ module.exports = {
             //listTrials();
             mapAndsets();
 
-            res.status(200).send('Ok');
+            res.status(200).send('Ok Baby!');
             console.log(`Hello............ES6 Trials End`);
         } catch (error) {
             console.error(error);
